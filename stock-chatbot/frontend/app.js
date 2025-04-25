@@ -4,6 +4,12 @@ async function sendMessage() {
     const message = userInput.value.trim();
     
     if (!message) return;
+
+    // Hide intro section on first message
+    if(document.querySelector('.intro-section')) {
+        document.querySelector('.intro-section').remove();
+        chatBox.style.display = 'block';
+    }
     
     // Add user message
     chatBox.innerHTML += `
@@ -15,7 +21,12 @@ async function sendMessage() {
     // Show typing indicator
     const typingIndicator = `
         <div class="message bot-message" id="typing-indicator">
-            <em>Fetching data...</em>
+            <em>Analyzing market data...</em>
+            <div class="typing-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
         </div>
     `;
     chatBox.innerHTML += typingIndicator;
@@ -27,26 +38,33 @@ async function sendMessage() {
             body: JSON.stringify({ message })
         });
         
-        // Remove typing indicator
         document.getElementById('typing-indicator').remove();
         
         const data = await response.json();
         chatBox.innerHTML += `
             <div class="message bot-message">
                 ${data.response}
+                ${data.chart ? `<div class="chart-container">${data.chart}</div>` : ''}
             </div>
         `;
     } catch (error) {
         document.getElementById('typing-indicator').remove();
         chatBox.innerHTML += `
             <div class="message bot-message negative">
-                Error: Could not fetch stock data. Please try again.
+                ⚠️ Market data unavailable. Please try again later.
             </div>
         `;
     }
     
     userInput.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Set query from trending topics
+function setQuery(topic) {
+    const input = document.getElementById('user-input');
+    input.value = topic;
+    sendMessage();
 }
 
 // Enter key handler

@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Stock Chatbot</title>
+    <title>AlphaInsight AI Analyst</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="chat-container">
+        <div class="intro-section">
+            <h2>AI-Powered Market Analyst</h2>
+            <p>Harness real-time financial data with natural language processing. Get instant insights on stocks, crypto, and global markets through conversational AI.</p>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Real-time Data</div>
+                    <div class="step-description">Direct API integration with market data providers</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">AI Analysis</div>
+                    <div class="step-description">Sentiment analysis & technical indicators</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Visual Insights</div>
+                    <div class="step-description">Interactive charts & pattern recognition</div>
+                </div>
+            </div>
+
+            <div class="trending">
+                <h3>📈 Active Markets:</h3>
+                <span onclick="setQuery('AAPL')">Apple Inc. (AAPL)</span>
+                <span onclick="setQuery('BTC')">Bitcoin (BTC)</span>
+                <span onclick="setQuery('TSLA')">Tesla (TSLA)</span>
+                <span onclick="setQuery('NIFTY 50')">NIFTY 50</span>
+                <span onclick="setQuery('Gold Price')">Gold Prices</span>
+            </div>
+        </div>
+
         <div id="chat-box" class="chat-box"></div>
         <div class="input-container">
-            <input type="text" id="user-input" placeholder="Ask about stocks...">
-            <button onclick="sendMessage()">Send</button>
+            <input type="text" id="user-input" placeholder="Ask about any stock or crypto...">
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Send</button>
         </div>
     </div>
     <script src="app.js"></script>
